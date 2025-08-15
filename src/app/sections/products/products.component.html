@@ -1,0 +1,73 @@
+<!-- La sección de productos ahora es completamente manejada por Angular Signals -->
+<section id="productos" class="products-section">
+    <div class="container">
+        <!-- Título de la sección -->
+        <div class="section-title">
+            <h2>Nuestros Productos</h2>
+            <p>Explora nuestro catálogo y encuentra la solución perfecta para tus necesidades agrícolas.</p>
+        </div>
+
+        <!-- Filtros de productos -->
+        <div class="product-filters">
+            <!-- Para leer una signal en la plantilla, se invoca como una función: currentFilter() -->
+            <button class="filter-btn" [class.active]="currentFilter() === 'todos'"
+                (click)="setFilter('todos')">Todos</button>
+            <button class="filter-btn" [class.active]="currentFilter() === 'fertilizantes'"
+                (click)="setFilter('fertilizantes')">Fertilizantes</button>
+            <button class="filter-btn" [class.active]="currentFilter() === 'semillas'"
+                (click)="setFilter('semillas')">Semillas</button>
+            <button class="filter-btn" [class.active]="currentFilter() === 'herbicidas'"
+                (click)="setFilter('herbicidas')">Herbicidas</button>
+            <button class="filter-btn" [class.active]="currentFilter() === 'insecticidas'"
+                (click)="setFilter('insecticidas')">Insecticidas</button>
+        </div>
+
+        <!-- Grid de productos -->
+        <div *ngIf="productsToShow().length > 0; else noProducts" class="product-grid">
+            <!-- Se itera sobre el valor de la signal productsToShow() -->
+            <div *ngFor="let product of productsToShow()" class="product-card" (click)="openModal(product)">
+                <div class="product-image-container">
+                    <img [src]="product.img" [alt]="'Imagen de ' + product.name" loading="lazy">
+                </div>
+                <div class="product-info">
+                    <p class="category" [ngClass]="'category-' + product.category">{{ product.category }}</p>
+                    <h3>{{ product.name }}</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Plantilla para cuando no hay productos -->
+        <ng-template #noProducts>
+            <p class="no-products-message">No hay productos en esta categoría.</p>
+        </ng-template>
+
+        <!-- Contenedor del botón "Cargar más" -->
+        <!-- Se muestra el botón comparando el tamaño de las signals -->
+        <div *ngIf="productsToShow().length < filteredProducts().length" class="load-more-container">
+            <button id="load-more-btn" (click)="loadMore()">Cargar más</button>
+        </div>
+    </div>
+</section>
+
+<!-- Modal del producto -->
+<!-- Se muestra usando el valor de la signal isModalVisible() -->
+<div *ngIf="isModalVisible()" class="modal-overlay visible" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+        <button class="modal-close-btn" aria-label="Cerrar modal" (click)="closeModal()">&times;</button>
+        <!-- Se usa un *ngIf extra para asegurar que selectedProduct() no sea nulo -->
+        <ng-container *ngIf="selectedProduct() as product">
+            <div class="modal-header">
+                <img [src]="product.img" [alt]="'Imagen de ' + product.name">
+                <h2>{{ product.name }}</h2>
+            </div>
+            <div class="modal-body">
+                <h3>Descripción</h3>
+                <p>{{ product.description }}</p>
+                <h3>Características</h3>
+                <ul>
+                    <li *ngFor="let feature of product.features">{{ feature }}</li>
+                </ul>
+            </div>
+        </ng-container>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+/* --- Reset y Variables Globales --- */
+:root {
+  --primary-green: #6a994e;
+  --light-green: #a7c957;
+  --background-light: #f7f7f7;
+  --dark-text: #383838;
+  --light-text: #6c757d;
+  --white: #ffffff;
+  --border-color: #e0e0e0;
+  --shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  --red-light: #fbe9e7;
+  --red-dark: #d84315;
+  --orange-light: #fff3e0;
+  --orange-dark: #ef6c00;
+  --icon-bg: #e8f5e9;
+  /* Light green for icon background */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  /* Ajuste para el header fijo */
+}
+
+body {
+  background-color: var(--white);
+  color: var(--dark-text);
+  line-height: 1.6;
+}
+
+body.modal-open {
+  overflow: hidden;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
