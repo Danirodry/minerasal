@@ -8,7 +8,15 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   isMobileMenuOpen = false;
 
-  toggleMobileMenu() {
+  toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    // Optional: Handle focus management for accessibility
+    if (this.isMobileMenuOpen) {
+      // Focus first menu item when menu opens
+      setTimeout(() => {
+        const firstMenuItem = document.querySelector('.main-nav a');
+        (firstMenuItem as HTMLElement)?.focus();
+      });
+    }
   }
 }

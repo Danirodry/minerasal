@@ -27,6 +27,7 @@
             <!-- Se itera sobre el valor de la signal productsToShow() -->
             <div *ngFor="let product of productsToShow()" class="product-card" (click)="openModal(product)">
                 <div class="product-image-container">
+
                     <img [src]="product.img" [alt]="'Imagen de ' + product.name" loading="lazy">
                 </div>
                 <div class="product-info">
@@ -50,15 +51,16 @@
 </section>
 
 <!-- Modal del producto -->
-<!-- Se muestra usando el valor de la signal isModalVisible() -->
 <div *ngIf="isModalVisible()" class="modal-overlay visible" (click)="closeModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
         <button class="modal-close-btn" aria-label="Cerrar modal" (click)="closeModal()">&times;</button>
-        <!-- Se usa un *ngIf extra para asegurar que selectedProduct() no sea nulo -->
         <ng-container *ngIf="selectedProduct() as product">
             <div class="modal-header">
                 <img [src]="product.img" [alt]="'Imagen de ' + product.name">
-                <h2>{{ product.name }}</h2>
+                <div class="modal-header-info">
+                    <p class="category" [ngClass]="'category-' + product.category">{{ product.category }}</p>
+                    <h2>{{ product.name }}</h2>
+                </div>
             </div>
             <div class="modal-body">
                 <h3>Descripción</h3>

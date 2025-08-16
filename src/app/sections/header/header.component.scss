@@ -24,11 +24,16 @@
 .logo {
   display: flex;
   align-items: center;
-  width: 25px;
-  height: 25px;
   cursor: pointer;
   user-select: none;
   -webkit-user-drag: none;
+
+  @media (max-width: 576px) {
+    img {
+      width: 80%;
+      height: auto;
+    }
+  }
 }
 
 .logo img {

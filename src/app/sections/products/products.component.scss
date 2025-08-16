@@ -81,7 +81,7 @@
   }
 
   .product-image-container {
-    background-color: #f0f4f8;
+    background-color: #ffffff;
     overflow: hidden;
     aspect-ratio: 1 / 1;
   }
@@ -231,6 +231,17 @@
   h2 {
     font-size: 1.8rem;
   }
+
+  .category {
+    margin-bottom: 0;
+    display: inline-block;
+  }
+}
+
+.modal-header-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .modal-body {
