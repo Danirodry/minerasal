@@ -28,7 +28,7 @@
   user-select: none;
   -webkit-user-drag: none;
 
-  @media (max-width: 576px) {
+  @media (min-width: 576px) {
     img {
       width: 80%;
       height: auto;
@@ -37,6 +37,7 @@
 }
 
 .logo img {
+  width: 100%;
   user-select: none;
   -webkit-user-drag: none;
 }
@@ -117,11 +118,13 @@
 }
 
 .burger-menu {
+  border: none;
+  background-color: #ffff;
   display: none; // Hidden by default
   cursor: pointer;
   width: 30px; // Increased from 24px
   height: 30px; // Increased from 24px
-  padding: 5px; // Slightly increased padding
+  padding: 1px; // Slightly increased padding
 
   @media (max-width: 992px) {
     display: block; // Show on mobile/tablet
